@@ -1,0 +1,117 @@
+.product {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  max-width: 1500px;
+  background-color: rgb(228, 228, 228);
+}
+
+.productWrapper {
+  position: relative;
+  width: 1000px;
+  height: 800px;
+  background-size: cover;
+}
+
+.background{
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.2);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.square{
+  border: 2px solid var(--border-color);
+  position: absolute;
+  border-radius: 6px;
+  position: relative;
+  resize: both;
+  opacity: 1;
+}
+
+.square::after{
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  bottom: -7px;
+  right: -7px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+ -webkit-clip-path: polygon(0% 100%, 
+                             5% 100%, 
+                             5% 95%, 
+                             95% 95%, 
+                             95% 100%, 
+                             100% 100%, 
+                             100% 95%, 
+                             95% 95%,
+                             95% 5%,
+                             100% 5%,
+                             100% 0%,
+                             95% 0%,
+                             95% 5%,
+                             5% 5%,
+                             5% 0%,
+                             0% 0%,
+                             0% 5%,
+                             5% 5%,
+                             5% 95%,
+                             0% 95%);
+  clip-path: polygon(0% 100%, 
+                             5% 100%, 
+                             5% 95%, 
+                             95% 95%, 
+                             95% 100%, 
+                             100% 100%, 
+                             100% 95%, 
+                             95% 95%,
+                             95% 5%,
+                             100% 5%,
+                             100% 0%,
+                             95% 0%,
+                             95% 5%,
+                             5% 5%,
+                             5% 0%,
+                             0% 0%,
+                             0% 5%,
+                             5% 5%,
+                             5% 95%,
+                             0% 95%);
+}
+
+.seResize{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.nwResize{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.neResize{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.swResize{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.seResize:hover, .nwResize:hover{
+  cursor: nwse-resize;
+}
+.neResize:hover, .swResize:hover{
+  cursor: nesw-resize;
+}
+
+@media (max-width: 600px) {
+}
