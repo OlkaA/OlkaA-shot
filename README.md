@@ -15,7 +15,7 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-Or you can se deployed result [here](https://olka-a-shot-lk0g7pshq.vercel.app/).
+Or you can se deployed result [here](https://olka-a-shot.vercel.app/).
 
 ## Features
 * User is able to create a shot, and see it in the list of shots in the right side;
