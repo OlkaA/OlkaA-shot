@@ -12,7 +12,6 @@ const Product = (props) => {
   let shot = useRef(null);
   let productWrapper = useRef(null);
   let seResize = useRef(null);
-  let nwResize = useRef(null); 
 
   const image = {
     url: props.imageUrl,
@@ -110,7 +109,6 @@ const Product = (props) => {
   };
 
   const onDragEnd = (e) => {  
-    console.log('drag')  
     if (!resize.s) {
       let x =
         e.nativeEvent.clientX -
@@ -183,7 +181,6 @@ const Product = (props) => {
               backgroundSize: `${image.width + 13}px ${image.height}px`,
             }}
             draggable
-            onDrag={() => console.log(3)}
             onDragEnd={onDragEnd}
           >
             <div
