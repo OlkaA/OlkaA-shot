@@ -26,14 +26,15 @@ const Product = (props) => {
     SW: "sw",
   };
 
+
   const onMouseDown = (e) => {
     e.persist();
 
     if (
-      e.nativeEvent.pageX > shot.current?.getBoundingClientRect().x &&
-      e.nativeEvent.pageX < shot.current?.getBoundingClientRect().right &&
-      e.nativeEvent.pageY > shot.current?.getBoundingClientRect().y &&
-      e.nativeEvent.pageY < shot.current?.getBoundingClientRect().bottom
+      e.pageX > shot.current?.getBoundingClientRect().x &&
+      e.pageX < shot.current?.getBoundingClientRect().right &&
+      e.pageY > shot.current?.getBoundingClientRect().y &&
+      e.pageY < shot.current?.getBoundingClientRect().bottom
     ) {
       setDrawing(false);
     } else {
@@ -41,10 +42,10 @@ const Product = (props) => {
       setDrawing(true);
       setPosition({
         x:
-          e.nativeEvent.clientX -
+          e.clientX -
           productWrapper.current.getBoundingClientRect().x,
         y:
-          e.nativeEvent.clientY -
+          e.clientY -
           productWrapper.current.getBoundingClientRect().y,
       });
     }
@@ -57,7 +58,7 @@ const Product = (props) => {
       e.preventDefault();
       setResize({ s: false, direction: "" });
       const temporarySize =
-        e.nativeEvent.clientX -
+        e.clientX -
         position.x -
         productWrapper.current.getBoundingClientRect().x;
 
@@ -65,11 +66,12 @@ const Product = (props) => {
     }  
     if (resize.s === true) {
       e.preventDefault();
+      e.stopPropagation();
       let temporarySize;
 
       if (resize.direction === directionsEnum.SE) {
         temporarySize =
-          e.nativeEvent.clientX -
+          e.clientX -
           position.x -
           productWrapper.current.getBoundingClientRect().x;
 
@@ -111,11 +113,11 @@ const Product = (props) => {
   const onDragEnd = (e) => {  
     if (!resize.s) {
       let x =
-        e.nativeEvent.clientX -
+        e.clientX -
         productWrapper.current.getBoundingClientRect().x -
         size.width / 2;
       let y =
-        e.nativeEvent.clientY -
+        e.clientY -
         productWrapper.current.getBoundingClientRect().y -
         size.height / 2;
 
