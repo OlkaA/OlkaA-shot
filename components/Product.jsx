@@ -26,6 +26,29 @@ const Product = (props) => {
     SW: "sw",
   };
 
+  const calculatePositions = () => {
+    let top, left;
+
+    if (size.width > 0 && size.height > 0) {
+      left = position.x
+      top = position.y;      
+    }
+    if (size.width < 0 && size.height > 0) {
+      left = position.x + size.width;
+      top = position.y;     
+    }
+    if (size.width > 0 && size.height < 0) {
+      left = position.x
+      top = position.y + size.height;     
+    }
+    if (size.width < 0 && size.height < 0) {
+      left = position.x + size.width;
+      top = position.y + size.height;
+    } 
+
+    return {left, top}
+  }
+
   const onMouseDown = (e) => {
     e.persist();
     if (
@@ -38,11 +61,10 @@ const Product = (props) => {
     } else {
       setSize({ width: 0, height: 0 });
       setDrawing(true);
-      let x, y;
 
-      x = e.clientX - productWrapper.current.getBoundingClientRect().x;
-
-      y = e.clientY - productWrapper.current.getBoundingClientRect().y;
+      const x = e.clientX - productWrapper.current.getBoundingClientRect().x;
+      const y = e.clientY - productWrapper.current.getBoundingClientRect().y;
+      
       setPosition({
         x: x,
         y: y,
@@ -95,11 +117,13 @@ const Product = (props) => {
     e.preventDefault();
 
     if (drawing && (Math.abs(size.width) > 50 || Math.abs(size.height) > 50)) {
+
+      const {left, top} = calculatePositions();
       const listItem = {
-        top: position.y,
-        left: position.x,
-        width: size.width,
-        height: size.height,
+        top,
+        left,
+        width: Math.abs(size.width),
+        height: Math.abs(size.height)
       };
       setList((list) => [...list, listItem]);
     }
@@ -168,24 +192,7 @@ const Product = (props) => {
   };
 
   const Shot = () => {
-    let top, left;
-
-    if (size.width > 0 && size.height > 0) {
-      left = position.x
-      top = position.y;      
-    }
-    if (size.width < 0 && size.height > 0) {
-      left = position.x + size.width;
-      top = position.y;     
-    }
-    if (size.width > 0 && size.height < 0) {
-      left = position.x
-      top = position.y + size.height;     
-    }
-    if (size.width < 0 && size.height < 0) {
-      left = position.x + size.width;
-      top = position.y + size.height;
-    } 
+    const {left, top } = calculatePositions();
 
     return (
       <div
