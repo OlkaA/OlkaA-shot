@@ -1,8 +1,8 @@
 import styles from '../styles/ListSelections.module.css';
-import { useState, useRef, useEffect } from "react";
+import { useRef} from "react";
 
 const ListSelections = (props) => {
-  let shot = useRef(null);    
+  const shot = useRef(null);    
   return (
     <ul className={styles.listSelections}>
       {props.list.map((selection, index) => {

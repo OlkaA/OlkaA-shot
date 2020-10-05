@@ -3,7 +3,7 @@ import ListSelections from "../components/ListSelections";
 import { useState, useRef, useEffect } from "react";
 
 const Product = (props) => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: null, y: null });
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [drawing, setDrawing] = useState(false);
   const [resize, setResize] = useState({ s: false, direction: "" });
@@ -25,6 +25,14 @@ const Product = (props) => {
     NE: "ne",
     SW: "sw",
   };
+
+  const shotSizeCondition = (e) => { 
+    return (e.pageX > shot.current?.getBoundingClientRect().x &&
+      e.pageX < shot.current?.getBoundingClientRect().right &&
+      e.pageY > shot.current?.getBoundingClientRect().y &&
+      e.pageY < shot.current?.getBoundingClientRect().bottom
+      )
+    };
 
   const calculatePositions = () => {
     let top, left;
@@ -51,14 +59,10 @@ const Product = (props) => {
 
   const onMouseDown = (e) => {
     e.persist();
-    if (
-      e.pageX > shot.current?.getBoundingClientRect().x &&
-      e.pageX < shot.current?.getBoundingClientRect().right &&
-      e.pageY > shot.current?.getBoundingClientRect().y &&
-      e.pageY < shot.current?.getBoundingClientRect().bottom
-    ) {
+    if(shotSizeCondition(e)){
       setDrawing(false);
-    } else {
+    }
+    else {
       setSize({ width: 0, height: 0 });
       setDrawing(true);
 
@@ -95,7 +99,7 @@ const Product = (props) => {
         width: calcWidth,
         height: finalHeight,
       });
-    }
+    } 
     if (resize.s === true) {
       e.preventDefault();
       e.stopPropagation();
